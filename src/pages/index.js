@@ -1,38 +1,40 @@
 import * as React from "react"
-import ReactVideo from "../components/reactvideo"
+import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-import useWindowSize from "../hooks/useWindowSize"
-const IndexPage = () => {
-  const { ar } = useWindowSize()
+import HeroSection from "../components/heroSection"
+import QuizSection from "../components/quizSection"
+import WhatWeDoSection from "../components/whatWeDoSection"
+import PortfolioSection from "../components/portfolioSection"
+import FormSection from "../components/formSection"
+import TrustSection from "../components/trustSection"
+
+const IndexPage = ({ data }) => {
   return (
-    <Layout>
-      <div className="react-player-wrapper">
-        <ReactVideo
-          width="100%"
-          height="100%"
-          playing={true}
-          playsinline
-          loop={true}
-          muted={true}
-          video={
-            ar > 1
-              ? `https://cdn.mustbefamily.com/zemlyki/desktop.mp4`
-              : `https://cdn.mustbefamily.com/zemlyki/mobile.mp4`
-          }
-          poster={
-            ar > 1
-              ? `https://cdn.mustbefamily.com/zemlyki/desktop.jpg`
-              : `https://cdn.mustbefamily.com/zemlyki/mobile.jpg`
-          }
-          className={`video`}
-          alt={`Земляки`}
-        />
-      </div>
+    <Layout data={data}>
+      <HeroSection />
+      <QuizSection />
+      <WhatWeDoSection />
+      <PortfolioSection />
+      <FormSection />
+      <TrustSection />
     </Layout>
   )
 }
 
-export const Head = () => <Seo title="Главная" />
+export const Head = ({ data }) => (
+  <Seo title={`${data.site.siteMetadata?.title} | Видео высокого качества`} />
+)
 
 export default IndexPage
+
+export const query = graphql`
+  query SiteTitleQuery {
+    site {
+      siteMetadata {
+        title
+        sitesubtitle
+      }
+    }
+  }
+`

@@ -4,7 +4,7 @@ import { useStaticQuery, graphql } from "gatsby"
 function Seo({ description, title, children }) {
   const { site } = useStaticQuery(
     graphql`
-      query {
+      query SeoQuery {
         site {
           siteMetadata {
             title
@@ -21,7 +21,7 @@ function Seo({ description, title, children }) {
 
   return (
     <>
-      <title>{defaultTitle ? `${title} | ${defaultTitle}` : title}</title>
+      <title>{title ? title : defaultTitle}</title>
       <meta name="description" content={metaDescription} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={metaDescription} />

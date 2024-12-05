@@ -1,20 +1,9 @@
 import * as React from "react"
-import { useStaticQuery, graphql } from "gatsby"
 import Header from "./header"
 import "../styles/global.css"
 import Footer from "./footer"
-const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-          sitesubtitle
-        }
-      }
-    }
-  `)
-
+const Layout = ({ data, children }) => {
+  console.log(data)
   return (
     <div className="flex flex-col">
       <Header
