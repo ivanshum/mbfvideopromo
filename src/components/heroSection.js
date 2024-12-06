@@ -5,7 +5,7 @@ import { RxDesktop } from "react-icons/rx"
 import { BsCameraReels } from "react-icons/bs"
 import { RxTimer } from "react-icons/rx"
 import { IconContext } from "react-icons"
-import FormHero from "./formHero"
+import Form from "./form"
 
 const HeroSection = () => {
   const { width, ar } = useWindowSize()
@@ -74,7 +74,7 @@ const HeroSection = () => {
             </div>
             {width > 1023 && (
               <div className="bg-white rounded-2xl flex flex-col max-w-[600px] text-black px-8 py-4 gap-2">
-                <FormHero />
+                <Form id="hero" />
               </div>
             )}
           </div>
@@ -82,7 +82,7 @@ const HeroSection = () => {
       </div>
       {width <= 1023 && (
         <div className="flex flex-col container mx-auto px-8 py-4 gap-2">
-          <FormHero />
+          <Form id="hero" />
         </div>
       )}
     </>

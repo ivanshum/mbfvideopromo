@@ -7,7 +7,7 @@ import HeroSection from "../components/heroSection"
 import QuizSection from "../components/quizSection"
 import WhatWeDoSection from "../components/whatWeDoSection"
 import PortfolioSection from "../components/portfolioSection"
-import FormSection from "../components/formSection"
+import ZoomSection from "../components/zoomSection"
 import TrustSection from "../components/trustSection"
 import ModalPolicy from "../components/modalPolicy"
 
@@ -19,7 +19,7 @@ const IndexPage = ({ data }) => {
       <QuizSection />
       <WhatWeDoSection />
       <PortfolioSection />
-      <FormSection />
+      <ZoomSection />
       <TrustSection />
       {showModal &&
         createPortal(

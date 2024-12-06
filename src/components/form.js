@@ -5,29 +5,31 @@ import PhoneInput, { isPossiblePhoneNumber } from "react-phone-number-input"
 import ru from "react-phone-number-input/locale/ru"
 import { useAppContext } from "../context/AppContext"
 
-const FormHero = () => {
+const Form = ({
+  id,
+  title = `Получите персональное коммерческое предложение с детальной сметой в
+        течение дня`,
+  offer = `Получить коммерческое предложение`,
+}) => {
   const {
     handleSubmit,
     formState: { errors },
     control,
   } = useForm({ mode: "all" })
   const { setIsModalOpen } = useAppContext()
-  const onSubmit = data => console.log(data)
-
+  const onSubmit = data => console.log(data, id)
+  const fieldName = id + "phoneinput"
   return (
     <>
-      <div className="text-lg lg:text-xl">
-        Получите персональное коммерческое предложение с детальной сметой в
-        течение дня
-      </div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label className="block pb-2" htmlFor="phoneinput">
+      <div className="text-lg lg:text-xl">{title}</div>
+      <form onSubmit={handleSubmit(onSubmit)} id={id}>
+        <label className="block pb-2" htmlFor={fieldName}>
           Ваш номер телефона
         </label>
         <div className="flex flex-col gap-2 lg:gap-4 lg:flex-row">
           <div>
             <Controller
-              name="phoneinput"
+              name={fieldName}
               control={control}
               rules={{
                 validate: value => {
@@ -43,8 +45,8 @@ const FormHero = () => {
                 <PhoneInput
                   value={value}
                   labels={ru}
-                  className={`rounded-lg px-5 py-2.5 border ${
-                    errors.phoneinput
+                  className={`rounded-lg px-5 py-2.5 border bg-inherit ${
+                    errors[fieldName]
                       ? "border-red-500 border-2"
                       : "border-1 border-black"
                   } lg:h-full`}
@@ -54,18 +56,19 @@ const FormHero = () => {
                   international
                   addInternationalOption={false}
                   withCountryCallingCode
-                  id="phoneinput"
+                  id={fieldName}
                 />
               )}
             />
           </div>
           <button
-            aria-label="Позвонить"
+            id={id + "submitbutton"}
+            aria-label={offer}
             type="submit"
             className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5"
           >
             <div className="flex flex-row gap-2 items-center justify-center text-base">
-              <span className="text-sm">Получить коммерческое предложение</span>
+              <span className="text-sm">{offer}</span>
             </div>
           </button>
         </div>
@@ -82,4 +85,4 @@ const FormHero = () => {
     </>
   )
 }
-export default FormHero
+export default Form

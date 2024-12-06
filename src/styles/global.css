@@ -10,3 +10,6 @@
 .PhoneInput.validField {
     border:2px solid greenyellow;
 } 
+input {
+    background-color: inherit;
+}
