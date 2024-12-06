@@ -9,7 +9,7 @@ const Layout = ({ data, children }) => {
   const { isModalOpen, setIsModalOpen, isModalFormOpen, setIsModalFormOpen } =
     useAppContext()
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col relative">
       <Header
         siteTitle={data.site.siteMetadata?.title || `Title`}
         siteSubTitle={data.site.siteMetadata?.sitesubtitle || `SubTitle`}

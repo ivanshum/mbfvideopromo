@@ -7,7 +7,7 @@ import { useAppContext } from "../context/AppContext"
 const Header = ({ siteTitle, siteSubTitle }) => {
   const { setIsModalFormOpen } = useAppContext()
   return (
-    <div className="p-3 w-full flex flex-row justify-between items-center">
+    <div className="p-3 w-full flex flex-row justify-between items-center sticky top-0 z-50 bg-white">
       <img className="h-20" src={Logo} alt="Логотип Mustbefamily" />
       <div>
         <div className="text-xl lg:text-xl font-bold uppercase hidden md:block">
