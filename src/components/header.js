@@ -17,7 +17,7 @@ const Header = ({ siteTitle, siteSubTitle }) => (
       <button
         aria-label="Позвонить"
         type="button"
-        class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5"
+        className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5"
       >
         <div className="flex flex-row gap-2 items-center justify-center text-base">
           <IconContext.Provider value={{ size: "1.5rem" }}>
@@ -29,7 +29,7 @@ const Header = ({ siteTitle, siteSubTitle }) => (
       <button
         type="button"
         aria-label="Заказать звонок"
-        class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5"
+        className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5"
       >
         <div className="flex flex-row gap-2 items-center justify-center text-base">
           <span className="text-sm uppercase">Заказать звонок</span>

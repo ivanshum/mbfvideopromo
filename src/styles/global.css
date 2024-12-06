@@ -4,3 +4,9 @@
 .react-player-wrapper video {
     object-fit: cover;
 }
+.PhoneInput.errorField {
+    border:2px solid red;
+} 
+.PhoneInput.validField {
+    border:2px solid greenyellow;
+} 

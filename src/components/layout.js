@@ -2,8 +2,10 @@ import * as React from "react"
 import Header from "./header"
 import "../styles/global.css"
 import Footer from "./footer"
+import { useAppContext } from "../context/AppContext"
+import ModalPolicy from "./modalPolicy"
 const Layout = ({ data, children }) => {
-  console.log(data)
+  const { isModalOpen, setIsModalOpen } = useAppContext()
   return (
     <div className="flex flex-col">
       <Header
@@ -11,6 +13,7 @@ const Layout = ({ data, children }) => {
         siteSubTitle={data.site.siteMetadata?.sitesubtitle || `SubTitle`}
       />
       <main>{children}</main>
+      {isModalOpen && <ModalPolicy handleSetIsModalOpen={setIsModalOpen} />}
       <Footer siteTitle={data.site.siteMetadata?.title || `Title`} />
     </div>
   )

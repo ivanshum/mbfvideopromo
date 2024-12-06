@@ -1,4 +1,5 @@
 import * as React from "react"
+import { createPortal } from "react-dom"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
@@ -8,8 +9,10 @@ import WhatWeDoSection from "../components/whatWeDoSection"
 import PortfolioSection from "../components/portfolioSection"
 import FormSection from "../components/formSection"
 import TrustSection from "../components/trustSection"
+import ModalPolicy from "../components/modalPolicy"
 
 const IndexPage = ({ data }) => {
+  const [showModal, setShowModal] = React.useState(false)
   return (
     <Layout data={data}>
       <HeroSection />
@@ -18,6 +21,11 @@ const IndexPage = ({ data }) => {
       <PortfolioSection />
       <FormSection />
       <TrustSection />
+      {showModal &&
+        createPortal(
+          <ModalPolicy onClose={() => setShowModal(false)} />,
+          document.body
+        )}
     </Layout>
   )
 }
