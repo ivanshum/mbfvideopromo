@@ -4,8 +4,10 @@ import "../styles/global.css"
 import Footer from "./footer"
 import { useAppContext } from "../context/AppContext"
 import ModalPolicy from "./modalPolicy"
+import ModalForm from "./modalForm"
 const Layout = ({ data, children }) => {
-  const { isModalOpen, setIsModalOpen } = useAppContext()
+  const { isModalOpen, setIsModalOpen, isModalFormOpen, setIsModalFormOpen } =
+    useAppContext()
   return (
     <div className="flex flex-col">
       <Header
@@ -14,6 +16,7 @@ const Layout = ({ data, children }) => {
       />
       <main>{children}</main>
       {isModalOpen && <ModalPolicy handleSetIsModalOpen={setIsModalOpen} />}
+      {isModalFormOpen && <ModalForm handleSetIsOpen={setIsModalFormOpen} />}
       <Footer siteTitle={data.site.siteMetadata?.title || `Title`} />
     </div>
   )
