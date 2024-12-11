@@ -5,9 +5,16 @@ import Footer from "./footer"
 import { useAppContext } from "../context/AppContext"
 import ModalPolicy from "./modalPolicy"
 import ModalForm from "./modalForm"
+import ModalVideo from "./modalVideo"
 const Layout = ({ data, children }) => {
-  const { isModalOpen, setIsModalOpen, isModalFormOpen, setIsModalFormOpen } =
-    useAppContext()
+  const {
+    isModalOpen,
+    setIsModalOpen,
+    isModalFormOpen,
+    setIsModalFormOpen,
+    isModalVideoOpen,
+    setIsModalVideoOpen,
+  } = useAppContext()
   return (
     <div className="flex flex-col relative">
       <Header
@@ -17,6 +24,9 @@ const Layout = ({ data, children }) => {
       <main>{children}</main>
       {isModalOpen && <ModalPolicy handleSetIsModalOpen={setIsModalOpen} />}
       {isModalFormOpen && <ModalForm handleSetIsOpen={setIsModalFormOpen} />}
+      {isModalVideoOpen && (
+        <ModalVideo handleSetIsVideoOpen={setIsModalVideoOpen} />
+      )}
       <Footer siteTitle={data.site.siteMetadata?.title || `Title`} />
     </div>
   )

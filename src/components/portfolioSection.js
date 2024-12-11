@@ -2,57 +2,61 @@ import * as React from "react"
 import ReactVideo from "./reactvideo"
 import useWindowSize from "../hooks/useWindowSize"
 import { useInView } from "react-intersection-observer"
+import { useAppContext } from "../context/AppContext"
+import { MdOutlinePlayCircleOutline } from "react-icons/md"
+import { IconContext } from "react-icons"
 
 const PortfolioSection = () => {
+  const { setIsModalVideoOpen, setVideoURL } = useAppContext()
   const { width, ar } = useWindowSize()
   const itemsData = [
     {
-      text: "Это Юрий ЛОЗА",
-      file: "_web-mbf_loza_1",
+      text: "BEMA. Премия за лучший маркетинговый опыт",
+      file: "Bema720",
     },
     {
-      text: "Он - Десептикон",
-      file: "Buriday_Deseptikon",
+      text: "Avito Premium",
+      file: "AvitoPremium720",
     },
     {
-      text: "Это Юрий ЛОЗА",
-      file: "_web-mbf_loza_1",
+      text: "ЛИГА. Новогодний отрыв",
+      file: "LigaNewYear720",
     },
     {
-      text: "Он - Десептикон",
-      file: "Buriday_Deseptikon",
+      text: "ОПРФ. Форум сообщество. Документальный фильм",
+      file: "OPRF720",
     },
     {
-      text: "Это Юрий ЛОЗА",
-      file: "_web-mbf_loza_1",
+      text: "ЛИГА. Совершеннолетний фест",
+      file: "LigaFest720",
     },
     {
-      text: "Он - Десептикон",
-      file: "Buriday_Deseptikon",
+      text: "РАЭК. Октябрьская сессия",
+      file: "RAEKOctober720",
     },
     {
-      text: "Это Юрий ЛОЗА",
-      file: "_web-mbf_loza_1",
+      text: "Конкурс «Лучший в индустрии туризма»",
+      file: "Istanbul720",
     },
     {
-      text: "Он - Десептикон",
-      file: "Buriday_Deseptikon",
+      text: "TOPDOG. Свобода не погибнет",
+      file: "TopdogFreedom720",
     },
     {
-      text: "Это Юрий ЛОЗА",
-      file: "_web-mbf_loza_1",
+      text: "Junwex Санкт-Петербург",
+      file: "Junwex720",
     },
     {
-      text: "Он - Десептикон",
-      file: "Buriday_Deseptikon",
+      text: "Дизайн выходные. Хроника",
+      file: "DWChronicle720",
     },
     {
-      text: "Это Юрий ЛОЗА",
-      file: "_web-mbf_loza_1",
+      text: "1C Bitrix Power",
+      file: "1c_bp720",
     },
     {
-      text: "Он - Десептикон",
-      file: "Buriday_Deseptikon",
+      text: "ЛИГА. Русская сказка",
+      file: "LigaRussianTale",
     },
   ]
   const Item = ({ onClick, title, shortUrl, poster }) => {
@@ -62,7 +66,7 @@ const PortfolioSection = () => {
     })
     const [hover, setHover] = React.useState(false)
     return (
-      <div className="flex flex-col gap-6 justify-start items-center">
+      <div className="flex flex-col gap-6 justify-start items-center relative">
         <div
           ref={ref}
           onClick={onClick}
@@ -72,7 +76,7 @@ const PortfolioSection = () => {
           onMouseLeave={() => {
             setHover(false)
           }}
-          className={`react-player-wrapper aspect-square`}
+          className={`react-player-wrapper aspect-square relative`}
         >
           <ReactVideo
             width="100%"
@@ -81,12 +85,17 @@ const PortfolioSection = () => {
             playsinline
             loop={true}
             muted={true}
-            video={`https://cdn.mustbefamily.com/short/${shortUrl}.mp4`}
-            poster={`https://cdn.mustbefamily.com/poster/${poster}.jpg`}
+            video={`https://cdn.mustbefamily.com/eventssite/short/${shortUrl}.mp4`}
             className={``}
             alt={title}
           />
+          <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
+            <IconContext.Provider value={{ size: "12rem", color: "white" }}>
+              <MdOutlinePlayCircleOutline />
+            </IconContext.Provider>
+          </div>
         </div>
+
         <div className="text-lg lg:text-base xl:text-lg text-slate-700 text-center">
           {title}
         </div>
@@ -103,7 +112,11 @@ const PortfolioSection = () => {
             title={value.text}
             shortUrl={value.file}
             poster={value.file}
-            onClick={() => console.log(value.file)}
+            onClick={() => {
+              setIsModalVideoOpen(true)
+              setVideoURL(value.file)
+              console.log(value.file)
+            }}
           />
         ))}
       </div>
