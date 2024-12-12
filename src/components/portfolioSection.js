@@ -115,7 +115,6 @@ const PortfolioSection = () => {
             onClick={() => {
               setIsModalVideoOpen(true)
               setVideoURL(value.file)
-              console.log(value.file)
             }}
           />
         ))}

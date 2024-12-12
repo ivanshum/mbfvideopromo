@@ -4,6 +4,7 @@ import "react-phone-number-input/style.css"
 import PhoneInput, { isPossiblePhoneNumber } from "react-phone-number-input"
 import ru from "react-phone-number-input/locale/ru"
 import { useAppContext } from "../context/AppContext"
+import FormSuccess from "./formSuccess"
 
 const Form = ({
   id,
@@ -13,13 +14,13 @@ const Form = ({
 }) => {
   const {
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitSuccessful },
     control,
   } = useForm({ mode: "all" })
   const { setIsModalOpen } = useAppContext()
   const onSubmit = data => console.log(data, id)
   const fieldName = id + "phoneinput"
-  return (
+  return !isSubmitSuccessful ? (
     <>
       <div className="text-lg lg:text-xl">{title}</div>
       <form onSubmit={handleSubmit(onSubmit)} id={id}>
@@ -45,10 +46,8 @@ const Form = ({
                 <PhoneInput
                   value={value}
                   labels={ru}
-                  className={`rounded-lg px-5 py-2.5 border bg-inherit ${
-                    errors[fieldName]
-                      ? "border-red-500 border-2"
-                      : "border-1 border-black"
+                  className={`rounded-lg px-5 py-2.5  box-border border-2 bg-inherit ${
+                    errors[fieldName] ? "border-red-500" : "border-gray-800"
                   } lg:h-full`}
                   onBlur={onBlur}
                   onChange={onChange}
@@ -83,6 +82,8 @@ const Form = ({
         </div>
       </form>
     </>
+  ) : (
+    <FormSuccess />
   )
 }
 export default Form
