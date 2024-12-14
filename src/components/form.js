@@ -5,6 +5,7 @@ import PhoneInput, { isPossiblePhoneNumber } from "react-phone-number-input"
 import ru from "react-phone-number-input/locale/ru"
 import { useAppContext } from "../context/AppContext"
 import FormSuccess from "./formSuccess"
+import SendFunc from "../utility/formSubmitFunc"
 
 const Form = ({
   id,
@@ -18,7 +19,10 @@ const Form = ({
     control,
   } = useForm({ mode: "all" })
   const { setIsModalOpen } = useAppContext()
-  const onSubmit = data => console.log(data, id)
+  const onSubmit = data => {
+    SendFunc(data[id + "phoneinput"])
+    console.log(data[id + "phoneinput"])
+  }
   const fieldName = id + "phoneinput"
   return !isSubmitSuccessful ? (
     <>

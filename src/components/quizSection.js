@@ -5,7 +5,7 @@ import ru from "react-phone-number-input/locale/ru"
 import PhoneInput, { isPossiblePhoneNumber } from "react-phone-number-input"
 import { useAppContext } from "../context/AppContext"
 import FormSuccess from "./formSuccess"
-
+import SendFunc from "../utility/formSubmitFunc"
 const QuizSection = () => {
   const {
     register,
@@ -14,7 +14,11 @@ const QuizSection = () => {
     control,
     formState: { errors, isSubmitSuccessful },
   } = useForm({ mode: "all" })
-  const onSubmit = data => console.log(data)
+  const onSubmit = data => {
+    const { ["quizformphone"]: _, ...rest } = data
+    const withoutphone = Object.assign({}, rest)
+    SendFunc(data["quizformphone"], withoutphone)
+  }
   const [frame, setFrame] = React.useState(0)
   const formValues = watch()
   const { setIsModalOpen } = useAppContext()
@@ -78,7 +82,7 @@ const QuizSection = () => {
           value={value || text || `${step}_${index}`}
           name={`answer${step}`}
         />
-        <label for={`answer${step}_${index}`}>{text}</label>
+        <label htmlFor={`answer${step}_${index}`}>{text}</label>
       </div>
     )
   }
