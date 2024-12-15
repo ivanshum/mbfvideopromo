@@ -25,7 +25,7 @@ const QuizSection = () => {
   const [isDisabled, setIsDisabled] = React.useState(true)
   React.useEffect(() => {
     setIsDisabled(
-      frame !== 7
+      frame !== 8
         ? !formValues[`answer${frame}`]
         : !(
             formValues[`quizformphone`] !== undefined &&
@@ -50,13 +50,13 @@ const QuizSection = () => {
   )
   const ButtonStep = ({ step, action }) => {
     const phrase =
-      step < 6
+      step < 7
         ? `Следующий вопрос`
-        : step === 6
+        : step === 7
         ? `Оставить контакты`
         : `Получить предложение`
     const buttonProps =
-      step !== 7 ? { type: "button", onClick: action } : { type: "submit" }
+      step !== 8 ? { type: "button", onClick: action } : { type: "submit" }
 
     return (
       <button
@@ -269,6 +269,30 @@ const QuizSection = () => {
             frame === 7 ? `block` : `hidden`
           } border border-black rounded-3xl my-20 relative flex flex-col p-8 gap-4 min-h-80 justify-between items-center`}
         >
+          <h4 className="text-3xl text-center">
+            Сколько будет длиться мероприятие?
+          </h4>
+          <div className="flex flex-col gap-2">
+            <input
+              {...register(`question7`)}
+              type="hidden"
+              value="Сколько будет длиться мероприятие?"
+              name={`question7`}
+            />
+            <Answer step={7} index={0} text={"3-4 часа"} />
+            <Answer step={7} index={1} text={"5-6 часов"} />
+            <Answer step={7} index={2} text={"7 и более часов"} />
+          </div>
+          <div className="flex flex-row justify-between w-full">
+            <BackButton />
+            <ButtonStep step={7} action={() => setFrame(8)} />
+          </div>
+        </div>{" "}
+        <div
+          className={`${
+            frame === 8 ? `block` : `hidden`
+          } border border-black rounded-3xl my-20 relative flex flex-col p-8 gap-4 min-h-80 justify-between items-center`}
+        >
           {!isSubmitSuccessful ? (
             <>
               <h4 className="text-3xl text-center">
@@ -324,7 +348,7 @@ const QuizSection = () => {
               </div>
               <div className="flex flex-row justify-between w-full">
                 <BackButton />
-                <ButtonStep step={7} />
+                <ButtonStep step={8} />
               </div>
             </>
           ) : (
