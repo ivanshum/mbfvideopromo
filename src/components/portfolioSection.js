@@ -3,7 +3,7 @@ import ReactVideo from "./reactvideo"
 import useWindowSize from "../hooks/useWindowSize"
 import { useInView } from "react-intersection-observer"
 import { useAppContext } from "../context/AppContext"
-import { MdOutlinePlayCircleOutline } from "react-icons/md"
+import { CiPlay1 } from "react-icons/ci"
 import { IconContext } from "react-icons"
 
 const PortfolioSection = () => {
@@ -76,7 +76,7 @@ const PortfolioSection = () => {
           onMouseLeave={() => {
             setHover(false)
           }}
-          className={`react-player-wrapper aspect-square relative`}
+          className={`aspect-video relative`}
         >
           <ReactVideo
             width="100%"
@@ -90,8 +90,8 @@ const PortfolioSection = () => {
             alt={title}
           />
           <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
-            <IconContext.Provider value={{ size: "12rem", color: "white" }}>
-              <MdOutlinePlayCircleOutline />
+            <IconContext.Provider value={{ size: "10rem", color: "white" }}>
+              <CiPlay1 />
             </IconContext.Provider>
           </div>
         </div>
@@ -105,7 +105,7 @@ const PortfolioSection = () => {
   return (
     <div className="container mx-auto py-10">
       <h3 className="text-4xl text-center">Портфолио Event видео</h3>
-      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-12 p-6 lg:p-12">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-8 md:p-6 lg:p-8">
         {itemsData.map((value, index) => (
           <Item
             key={index}

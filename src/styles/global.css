@@ -1,15 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-.react-player-wrapper video {
-    object-fit: cover;
+video {
+  object-fit: cover;
+}
+.fullvideo video {
+  object-fit: contain;
 }
 .PhoneInput.errorField {
-    border:2px solid red;
-} 
+  border: 2px solid red;
+}
 .PhoneInput.validField {
-    border:2px solid greenyellow;
-} 
+  border: 2px solid greenyellow;
+}
 input {
-    background-color: inherit;
+  background-color: inherit;
 }

@@ -11,7 +11,7 @@ const HeroSection = () => {
   const { width, ar } = useWindowSize()
   return (
     <>
-      <div className="react-player-wrapper relative h-screen">
+      <div className="relative h-screen">
         <ReactVideo
           width="100%"
           height="100%"
