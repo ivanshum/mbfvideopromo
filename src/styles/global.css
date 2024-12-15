@@ -1,4 +1,10 @@
+@import url("https://use.typekit.net/dnl3jus.css");
 @tailwind base;
+@layer base {
+  html {
+    @apply font-body;
+  }
+}
 @tailwind components;
 @tailwind utilities;
 video {

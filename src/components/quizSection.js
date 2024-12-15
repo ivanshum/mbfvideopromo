@@ -82,13 +82,15 @@ const QuizSection = () => {
           value={value || text || `${step}_${index}`}
           name={`answer${step}`}
         />
-        <label htmlFor={`answer${step}_${index}`}>{text}</label>
+        <label className="text-lg" htmlFor={`answer${step}_${index}`}>
+          {text}
+        </label>
       </div>
     )
   }
   return (
-    <div className="bg-white container mx-auto rounded flex flex-col text-black p-8 ">
-      <h3 className="text-4xl text-center">
+    <div className="bg-white container mx-auto rounded flex flex-col text-black p-2 lg:p-8 ">
+      <h3 className="text-2xl md:text-3xl lg:text-4xl text-center">
         Пройдите опрос и получите уникальное предложение созданное специально
         для вас
       </h3>
@@ -96,9 +98,9 @@ const QuizSection = () => {
         <div
           className={`${
             frame === 0 ? `block` : `hidden`
-          } border border-black rounded-3xl my-20 relative flex flex-col p-8 gap-4 min-h-80 justify-between items-center`}
+          } border border-black rounded-3xl my-20 relative flex flex-col p-4 gap-2 lg:p-8 lg:gap-4 min-h-96 justify-between items-center`}
         >
-          <h4 className="text-3xl text-center">
+          <h4 className="text-xl md:text-2xl lg:text-3xl text-center">
             Ваше мероприятие будет проходить на открытой или закрытой площадке?
           </h4>
           <div className="flex flex-col gap-2">
@@ -118,9 +120,9 @@ const QuizSection = () => {
         <div
           className={`${
             frame === 1 ? `block` : `hidden`
-          } border border-black rounded-3xl my-20 relative flex flex-col p-8 gap-4 min-h-80 justify-between items-center`}
+          } border border-black rounded-3xl my-20 relative flex flex-col p-4 gap-2 lg:p-8 lg:gap-4 min-h-96 justify-between items-center`}
         >
-          <h4 className="text-3xl text-center">
+          <h4 className="text-xl md:text-2xl lg:text-3xl text-center">
             Где будет проходить мероприятие?
           </h4>
           <div className="flex flex-col gap-2">
@@ -142,9 +144,9 @@ const QuizSection = () => {
         <div
           className={`${
             frame === 2 ? `block` : `hidden`
-          } border border-black rounded-3xl my-20 relative flex flex-col p-8 gap-4 min-h-80 justify-between items-center`}
+          } border border-black rounded-3xl my-20 relative flex flex-col p-4 gap-2 lg:p-8 lg:gap-4 min-h-96 justify-between items-center`}
         >
-          <h4 className="text-3xl text-center">
+          <h4 className="text-xl md:text-2xl lg:text-3xl text-center">
             Какое планируется количество гостей?
           </h4>
           <div className="flex flex-col gap-2 self-center">
@@ -167,9 +169,9 @@ const QuizSection = () => {
         <div
           className={`${
             frame === 3 ? `block` : `hidden`
-          } border border-black rounded-3xl my-20 relative flex flex-col p-8 gap-4 min-h-80 justify-between items-center`}
+          } border border-black rounded-3xl my-20 relative flex flex-col p-4 gap-2 lg:p-8 lg:gap-4 min-h-96 justify-between items-center`}
         >
-          <h4 className="text-3xl text-center">
+          <h4 className="text-xl md:text-2xl lg:text-3xl text-center">
             Мероприятие частное или компании?
           </h4>
           <div className="flex flex-col gap-2">
@@ -198,9 +200,9 @@ const QuizSection = () => {
         <div
           className={`${
             frame === 4 ? `block` : `hidden`
-          } border border-black rounded-3xl my-20 relative flex flex-col p-8 gap-4 min-h-80 justify-between items-center`}
+          } border border-black rounded-3xl my-20 relative flex flex-col p-4 gap-2 lg:p-8 lg:gap-4 min-h-96 justify-between items-center`}
         >
-          <h4 className="text-3xl text-center">
+          <h4 className="text-xl md:text-2xl lg:text-3xl text-center">
             Предполагается ли прямая трансляция?
           </h4>
           <div className="flex flex-col gap-2">
@@ -221,9 +223,9 @@ const QuizSection = () => {
         <div
           className={`${
             frame === 5 ? `block` : `hidden`
-          } border border-black rounded-3xl my-20 relative flex flex-col p-8 gap-4 min-h-80 justify-between items-center`}
+          } border border-black rounded-3xl my-20 relative flex flex-col p-4 gap-2 lg:p-8 lg:gap-4 min-h-96 justify-between items-center`}
         >
-          <h4 className="text-3xl text-center">
+          <h4 className="text-xl md:text-2xl lg:text-3xl text-center">
             Предполагается ли видеоинтервью у участников/гостей мероприятия?
           </h4>
           <div className="flex flex-col gap-2">
@@ -244,9 +246,9 @@ const QuizSection = () => {
         <div
           className={`${
             frame === 6 ? `block` : `hidden`
-          } border border-black rounded-3xl my-20 relative flex flex-col p-8 gap-4 min-h-80 justify-between items-center`}
+          } border border-black rounded-3xl my-20 relative flex flex-col p-4 gap-2 lg:p-8 lg:gap-4 min-h-96 justify-between items-center`}
         >
-          <h4 className="text-3xl text-center">
+          <h4 className="text-xl md:text-2xl lg:text-3xl text-center">
             Нужен ли монтаж ролика в день мероприятия (SDE)?
           </h4>
           <div className="flex flex-col gap-2">
@@ -267,9 +269,9 @@ const QuizSection = () => {
         <div
           className={`${
             frame === 7 ? `block` : `hidden`
-          } border border-black rounded-3xl my-20 relative flex flex-col p-8 gap-4 min-h-80 justify-between items-center`}
+          } border border-black rounded-3xl my-20 relative flex flex-col p-4 gap-2 lg:p-8 lg:gap-4 min-h-96 justify-between items-center`}
         >
-          <h4 className="text-3xl text-center">
+          <h4 className="text-xl md:text-2xl lg:text-3xl text-center">
             Сколько будет длиться мероприятие?
           </h4>
           <div className="flex flex-col gap-2">
@@ -291,11 +293,11 @@ const QuizSection = () => {
         <div
           className={`${
             frame === 8 ? `block` : `hidden`
-          } border border-black rounded-3xl my-20 relative flex flex-col p-8 gap-4 min-h-80 justify-between items-center`}
+          } border border-black rounded-3xl my-20 relative flex flex-col p-4 gap-2 lg:p-8 lg:gap-4 min-h-96 justify-between items-center`}
         >
           {!isSubmitSuccessful ? (
             <>
-              <h4 className="text-3xl text-center">
+              <h4 className="text-xl md:text-2xl lg:text-3xl text-center">
                 Оставте ваши контакты чтобы получить предложение
               </h4>
               <label className="block pb-2" htmlFor={"quizformphone"}>

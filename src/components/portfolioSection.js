@@ -96,7 +96,7 @@ const PortfolioSection = () => {
           </div>
         </div>
 
-        <div className="text-lg lg:text-base xl:text-lg text-slate-700 text-center">
+        <div className="text-lg lg:text-base xl:text-lg text-slate-700 text-center uppercase">
           {title}
         </div>
       </div>
@@ -104,7 +104,7 @@ const PortfolioSection = () => {
   }
   return (
     <div className="container mx-auto py-10">
-      <h3 className="text-4xl text-center">Портфолио Event видео</h3>
+      <h3 className="text-4xl text-center pb-8">Портфолио Event видео</h3>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-8 md:p-6 lg:p-8">
         {itemsData.map((value, index) => (
           <Item

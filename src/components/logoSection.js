@@ -19,7 +19,7 @@ const LogoSection = () => {
             <img
               src={image}
               alt="Логотип партнера"
-              className="w-full object-fill lg:brightness-0 lg:invert-[1] lg:hover:invert-0 lg:hover:brightness-100"
+              className="w-full object-fill brightness-0 invert-[1] hover:invert-0 hover:brightness-100"
               style={{ transition: "0.2s filter linear" }}
             />
           </div>
