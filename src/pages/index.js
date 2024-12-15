@@ -10,6 +10,7 @@ import PortfolioSection from "../components/portfolioSection"
 import ZoomSection from "../components/zoomSection"
 import TrustSection from "../components/trustSection"
 import ModalPolicy from "../components/modalPolicy"
+import LogoSection from "../components/logoSection"
 
 const IndexPage = ({ data }) => {
   const [showModal, setShowModal] = React.useState(false)
@@ -20,6 +21,7 @@ const IndexPage = ({ data }) => {
       <WhatWeDoSection />
       <PortfolioSection />
       <ZoomSection />
+      <LogoSection />
       <TrustSection />
       {showModal &&
         createPortal(
