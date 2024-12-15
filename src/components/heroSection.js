@@ -21,13 +21,13 @@ const HeroSection = () => {
           muted={true}
           video={
             ar > 1
-              ? `https://cdn.mustbefamily.com/zemlyki/desktop.mp4`
-              : `https://cdn.mustbefamily.com/zemlyki/mobile.mp4`
+              ? `https://cdn.mustbefamily.com/eventssite/eventshero_d.mp4`
+              : `https://cdn.mustbefamily.com/eventssite/eventshero_m.mp4`
           }
           poster={
             ar > 1
-              ? `https://cdn.mustbefamily.com/zemlyki/desktop.jpg`
-              : `https://cdn.mustbefamily.com/zemlyki/mobile.jpg`
+              ? `https://cdn.mustbefamily.com/eventssite/eventshero_d.jpg`
+              : `https://cdn.mustbefamily.com/eventssite/eventshero_m.jpg`
           }
           className={`z-0 relative`}
           alt={`Промо видео`}

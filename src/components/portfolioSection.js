@@ -8,7 +8,7 @@ import { IconContext } from "react-icons"
 
 const PortfolioSection = () => {
   const { setIsModalVideoOpen, setVideoURL } = useAppContext()
-  const { width, ar } = useWindowSize()
+  const { width } = useWindowSize()
   const itemsData = [
     {
       text: "BEMA. Премия за лучший маркетинговый опыт",
@@ -62,7 +62,7 @@ const PortfolioSection = () => {
   const Item = ({ onClick, title, shortUrl, poster }) => {
     const { ref, inView } = useInView({
       /* Optional options */
-      threshold: ar < 1 ? 0.5 * ar : 0.5,
+      threshold: 1,
     })
     const [hover, setHover] = React.useState(false)
     return (
