@@ -20,8 +20,7 @@ const Form = ({
   } = useForm({ mode: "all" })
   const { setIsModalOpen } = useAppContext()
   const onSubmit = data => {
-    SendFunc(data[id + "phoneinput"])
-    console.log(data[id + "phoneinput"])
+    SendFunc(data[id + "phoneinput"], id)
   }
   const fieldName = id + "phoneinput"
   return !isSubmitSuccessful ? (
@@ -79,7 +78,7 @@ const Form = ({
           Нажимая кнопку, вы соглашаетесь с{" "}
           <a
             onClick={() => setIsModalOpen(true)}
-            className="box-border border-b-2 border-dotted border-blue-800 cursor-pointer"
+            className="underline cursor-pointer"
           >
             политикой конфиденциальности
           </a>

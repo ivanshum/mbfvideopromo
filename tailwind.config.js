@@ -14,33 +14,33 @@ for (let [key, value] of Object.entries(defaultTheme.fontSize)) {
     },
   ]
 } */
-module.exports = {
-  content: [
-    "./src/pages/**/*.{js,jsx,ts,tsx}",
-    "./src/components/**/*.{js,jsx,ts,tsx}",
-  ],
-  theme: {
-    extend: {
-      /* fontSize: newFontSize, */
-      fontFamily: {
-        body: [
-          "circe",
-          "Roboto",
-          "BlinkMacSystemFont",
-          "-apple-system",
-          '"Segoe UI"',
-          "Oxygen",
-          "Ubuntu",
-          "Cantarell",
-          '"Fira Sans"',
-          '"Droid Sans"',
-          '"Helvetica Neue"',
-          "Helvetica",
-          "Arial",
-          "sans-serif",
-        ],
-      },
+import plugin from "tailwindcss/plugin"
+
+export const content = [
+  "./src/pages/**/*.{js,jsx,ts,tsx}",
+  "./src/components/**/*.{js,jsx,ts,tsx}",
+]
+export const theme = {
+  extend: {
+    /* fontSize: newFontSize, */
+    fontFamily: {
+      body: [
+        "circe",
+        "Roboto",
+        "BlinkMacSystemFont",
+        "-apple-system",
+        '"Segoe UI"',
+        "Oxygen",
+        "Ubuntu",
+        "Cantarell",
+        '"Fira Sans"',
+        '"Droid Sans"',
+        '"Helvetica Neue"',
+        "Helvetica",
+        "Arial",
+        "sans-serif",
+      ],
     },
   },
-  plugins: [],
 }
+export const plugins = []

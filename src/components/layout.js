@@ -16,7 +16,7 @@ const Layout = ({ data, children }) => {
     setIsModalVideoOpen,
   } = useAppContext()
   return (
-    <div className="flex flex-col relative">
+    <div className="flex flex-col relative text-balance">
       <Header
         siteTitle={data.site.siteMetadata?.title || `Title`}
         siteSubTitle={data.site.siteMetadata?.sitesubtitle || `SubTitle`}

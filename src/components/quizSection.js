@@ -17,7 +17,7 @@ const QuizSection = () => {
   const onSubmit = data => {
     const { ["quizformphone"]: _, ...rest } = data
     const withoutphone = Object.assign({}, rest)
-    SendFunc(data["quizformphone"], withoutphone)
+    SendFunc(data["quizformphone"], "quizform", withoutphone)
   }
   const [frame, setFrame] = React.useState(0)
   const formValues = watch()
@@ -32,7 +32,7 @@ const QuizSection = () => {
             Object.keys(errors).length === 0
           )
     )
-  }, [formValues])
+  }, [formValues, errors, frame])
   const BackButton = () => (
     <button
       id="quizformsubmitbutton"
@@ -90,7 +90,7 @@ const QuizSection = () => {
   }
   return (
     <div className="bg-white container mx-auto rounded flex flex-col text-black p-2 lg:p-8 ">
-      <h3 className="text-2xl md:text-3xl lg:text-4xl text-center">
+      <h3 className="text-2xl md:text-3xl lg:text-4xl text-center pt-12">
         Пройдите опрос и получите уникальное предложение созданное специально
         для вас
       </h3>
@@ -98,7 +98,7 @@ const QuizSection = () => {
         <div
           className={`${
             frame === 0 ? `block` : `hidden`
-          } border border-black rounded-3xl my-20 relative flex flex-col p-4 gap-2 lg:p-8 lg:gap-4 min-h-96 justify-between items-center`}
+          } border border-black rounded-3xl my-8 relative flex flex-col p-4 gap-2 lg:p-8 lg:gap-4 min-h-96 justify-between items-center`}
         >
           <h4 className="text-xl md:text-2xl lg:text-3xl text-center">
             Ваше мероприятие будет проходить на открытой или закрытой площадке?
@@ -120,7 +120,7 @@ const QuizSection = () => {
         <div
           className={`${
             frame === 1 ? `block` : `hidden`
-          } border border-black rounded-3xl my-20 relative flex flex-col p-4 gap-2 lg:p-8 lg:gap-4 min-h-96 justify-between items-center`}
+          } border border-black rounded-3xl my-8 relative flex flex-col p-4 gap-2 lg:p-8 lg:gap-4 min-h-96 justify-between items-center`}
         >
           <h4 className="text-xl md:text-2xl lg:text-3xl text-center">
             Где будет проходить мероприятие?
@@ -144,7 +144,7 @@ const QuizSection = () => {
         <div
           className={`${
             frame === 2 ? `block` : `hidden`
-          } border border-black rounded-3xl my-20 relative flex flex-col p-4 gap-2 lg:p-8 lg:gap-4 min-h-96 justify-between items-center`}
+          } border border-black rounded-3xl my-8 relative flex flex-col p-4 gap-2 lg:p-8 lg:gap-4 min-h-96 justify-between items-center`}
         >
           <h4 className="text-xl md:text-2xl lg:text-3xl text-center">
             Какое планируется количество гостей?
@@ -169,7 +169,7 @@ const QuizSection = () => {
         <div
           className={`${
             frame === 3 ? `block` : `hidden`
-          } border border-black rounded-3xl my-20 relative flex flex-col p-4 gap-2 lg:p-8 lg:gap-4 min-h-96 justify-between items-center`}
+          } border border-black rounded-3xl my-8 relative flex flex-col p-4 gap-2 lg:p-8 lg:gap-4 min-h-96 justify-between items-center`}
         >
           <h4 className="text-xl md:text-2xl lg:text-3xl text-center">
             Мероприятие частное или компании?
@@ -200,7 +200,7 @@ const QuizSection = () => {
         <div
           className={`${
             frame === 4 ? `block` : `hidden`
-          } border border-black rounded-3xl my-20 relative flex flex-col p-4 gap-2 lg:p-8 lg:gap-4 min-h-96 justify-between items-center`}
+          } border border-black rounded-3xl my-8 relative flex flex-col p-4 gap-2 lg:p-8 lg:gap-4 min-h-96 justify-between items-center`}
         >
           <h4 className="text-xl md:text-2xl lg:text-3xl text-center">
             Предполагается ли прямая трансляция?
@@ -223,7 +223,7 @@ const QuizSection = () => {
         <div
           className={`${
             frame === 5 ? `block` : `hidden`
-          } border border-black rounded-3xl my-20 relative flex flex-col p-4 gap-2 lg:p-8 lg:gap-4 min-h-96 justify-between items-center`}
+          } border border-black rounded-3xl my-8 relative flex flex-col p-4 gap-2 lg:p-8 lg:gap-4 min-h-96 justify-between items-center`}
         >
           <h4 className="text-xl md:text-2xl lg:text-3xl text-center">
             Предполагается ли видеоинтервью у участников/гостей мероприятия?
@@ -246,7 +246,7 @@ const QuizSection = () => {
         <div
           className={`${
             frame === 6 ? `block` : `hidden`
-          } border border-black rounded-3xl my-20 relative flex flex-col p-4 gap-2 lg:p-8 lg:gap-4 min-h-96 justify-between items-center`}
+          } border border-black rounded-3xl my-8 relative flex flex-col p-4 gap-2 lg:p-8 lg:gap-4 min-h-96 justify-between items-center`}
         >
           <h4 className="text-xl md:text-2xl lg:text-3xl text-center">
             Нужен ли монтаж ролика в день мероприятия (SDE)?
@@ -269,7 +269,7 @@ const QuizSection = () => {
         <div
           className={`${
             frame === 7 ? `block` : `hidden`
-          } border border-black rounded-3xl my-20 relative flex flex-col p-4 gap-2 lg:p-8 lg:gap-4 min-h-96 justify-between items-center`}
+          } border border-black rounded-3xl my-8 relative flex flex-col p-4 gap-2 lg:p-8 lg:gap-4 min-h-96 justify-between items-center`}
         >
           <h4 className="text-xl md:text-2xl lg:text-3xl text-center">
             Сколько будет длиться мероприятие?
@@ -293,7 +293,7 @@ const QuizSection = () => {
         <div
           className={`${
             frame === 8 ? `block` : `hidden`
-          } border border-black rounded-3xl my-20 relative flex flex-col p-4 gap-2 lg:p-8 lg:gap-4 min-h-96 justify-between items-center`}
+          } border border-black rounded-3xl my-8 relative flex flex-col p-4 gap-2 lg:p-8 lg:gap-4 min-h-96 justify-between items-center`}
         >
           {!isSubmitSuccessful ? (
             <>

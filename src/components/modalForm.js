@@ -15,10 +15,10 @@ const ModalForm = ({ handleSetIsOpen }) => {
         </svg>
       </div>
       <div className="relative w-auto">
-        <h3 className="text-xl">Заказать обратный звонок</h3>
+        <h3 className="text-xl">Не смогли дозвониться?</h3>
         <Form
           id="callback"
-          title="Оставьте ваш номер телефона и получите консультацию в течение 15 минут"
+          title="Оставьте номер и мы перезвоним вам сами!"
           offer="Заказать звонок"
         />
       </div>

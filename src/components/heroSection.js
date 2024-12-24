@@ -34,7 +34,7 @@ const HeroSection = () => {
         />
         <div className="absolute z-10 top-0 bg-[#000000ad] w-full h-full">
           <div className="flex flex-col justify-center items-center text-white gap-8 p-8 h-full container mx-auto">
-            <h1 className="font-semibold text-3xl lg:text-5xl ">
+            <h1 className="font-semibold text-3xl lg:text-5xl pt-12">
               Видеосъемка мероприятий
             </h1>
             <h2 className="text-xl lg:text-3xl">

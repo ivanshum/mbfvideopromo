@@ -21,7 +21,9 @@ const ModalVideo = ({ handleSetIsVideoOpen }) => {
           width={`100%`}
           height={`100%`}
           controls={true}
+          playing
           playsinline
+          poster={`https://cdn.mustbefamily.com/eventssite/poster/${videoURL}.jpg`}
           video={`https://cdn.mustbefamily.com/eventssite/full/${videoURL}.mp4`}
         />
       </div>

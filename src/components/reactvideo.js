@@ -1,5 +1,5 @@
 import * as React from "react"
-import ReactPlayer from "react-player/lazy"
+import ReactPlayer from "react-player/file"
 
 const ReactVideo = ({ video, poster, ...props }) => {
   return (

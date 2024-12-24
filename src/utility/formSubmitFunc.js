@@ -1,11 +1,13 @@
 const SendFunc = async (
   phone,
+  id,
   data = {},
   onSucess = () => {},
   onFail = () => {}
 ) => {
   let formData = new FormData()
   formData.append(`phone`, phone.replace(/[^\d]/g, ""))
+  formData.append(`id`, id)
   formData.append(`isquiz`, !!(Object.keys(data).length !== 0))
   formData.append(`addData`, Object.entries(data))
   return fetch("/form.php", {

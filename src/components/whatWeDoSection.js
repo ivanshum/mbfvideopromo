@@ -31,7 +31,7 @@ const WhatWeDoSection = () => {
     </div>
   )
   return (
-    <div className="container mx-auto py-10 px-6">
+    <div className="container mx-auto py-4 md:py-8 lg:py-10 px-6">
       <h3 className="text-3xl text-center pb-8">
         Какие мероприятия мы снимаем?
       </h3>

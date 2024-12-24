@@ -2,7 +2,6 @@
 header("Content-type: application/json; charset=utf-8");
 
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 
 require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
@@ -24,6 +23,7 @@ if (isset($_POST['phone'])) {
   $mail->addAddress("we@mustbefamily.com", "Must Be Family");
   $mail->isHTML(true);
   $phone = trim($_POST['phone']);
+  $id = trim($_POST['id']);
   if (!preg_match("/^\d{9,12}$/", $phone)) {
     $phone_error = array("status" => "error", "msg" => "Номер телефона заполнен неверно");
     $return = $phone_error;
@@ -55,6 +55,7 @@ if (isset($_POST['phone'])) {
     } else {
       $mail->Subject = "Обращение на events.mustbefamily.com";
     }
+    $body .= "<p>Идентификатор формы: $id</p>";
     $body .= "<p>Телефон: $phone</p></div></body></html>";
     $mail->Body = $body;
     if ($mail->send()) {
