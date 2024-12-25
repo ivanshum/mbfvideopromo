@@ -13,12 +13,25 @@ module.exports = {
     siteUrl: `https://events.mustbefamily.com/`,
   },
   plugins: [
+    {
+      resolve: "gatsby-plugin-sitemap",
+      options: {
+        excludes: ["/thx-conversion"],
+      },
+    },
     "gatsby-plugin-postcss",
-    "gatsby-plugin-sitemap",
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
         icon: `src/icons/favicon256.png`,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-robots-txt",
+      options: {
+        host: "https://events.mustbefamily.com/",
+        sitemap: "https://events.mustbefamily.com/sitemap-index.xml",
+        policy: [{ userAgent: "*", allow: "/", disallow: "/thx-conversion" }],
       },
     },
   ],
