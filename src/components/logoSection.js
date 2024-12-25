@@ -17,7 +17,7 @@ const LogoSection = () => {
         {AllImages.map((image, index) => (
           <div
             className={`flex justify-center items-center ${
-              index == 15 ? `md:col-start-2 lg:col-start-3` : ``
+              index === 15 ? `md:col-start-2 lg:col-start-3` : ``
             }`}
             key={index}
           >
