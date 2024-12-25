@@ -6,7 +6,7 @@ import { useAppContext } from "../context/AppContext"
 import ModalPolicy from "./modalPolicy"
 import ModalForm from "./modalForm"
 import ModalVideo from "./modalVideo"
-const Layout = ({ data, children }) => {
+const Layout = ({ data, children, hideFooter = false }) => {
   const {
     isModalOpen,
     setIsModalOpen,
@@ -27,7 +27,9 @@ const Layout = ({ data, children }) => {
       {isModalVideoOpen && (
         <ModalVideo handleSetIsVideoOpen={setIsModalVideoOpen} />
       )}
-      <Footer siteTitle={data.site.siteMetadata?.title || `Title`} />
+      {!hideFooter && (
+        <Footer siteTitle={data.site.siteMetadata?.title || `Title`} />
+      )}
     </div>
   )
 }
