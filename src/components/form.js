@@ -4,9 +4,8 @@ import "react-phone-number-input/style.css"
 import PhoneInput, { isPossiblePhoneNumber } from "react-phone-number-input"
 import ru from "react-phone-number-input/locale/ru"
 import { useAppContext } from "../context/AppContext"
-import FormSuccess from "./formSuccess"
 import SendFunc from "../utility/formSubmitFunc"
-
+import { navigate } from "gatsby"
 const Form = ({
   id,
   title = `Получите персональное коммерческое предложение с детальной сметой в
@@ -15,15 +14,17 @@ const Form = ({
 }) => {
   const {
     handleSubmit,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
     control,
   } = useForm({ mode: "all" })
   const { setIsModalOpen } = useAppContext()
   const onSubmit = data => {
-    SendFunc(data[id + "phoneinput"], id)
+    SendFunc(data[id + "phoneinput"], id, {}, () =>
+      navigate("/thx-conversion/")
+    )
   }
   const fieldName = id + "phoneinput"
-  return !isSubmitSuccessful ? (
+  return (
     <>
       <div className="text-lg lg:text-xl">{title}</div>
       <form onSubmit={handleSubmit(onSubmit)} id={id}>
@@ -75,7 +76,7 @@ const Form = ({
           </button>
         </div>
         <div className="text-sm pt-2">
-          Нажимая кнопку, вы соглашаетесь с{" "}
+          Нажимая кнопку, вы соглашаетесь с&nbsp;
           <a
             onClick={() => setIsModalOpen(true)}
             className="underline cursor-pointer"
@@ -85,8 +86,6 @@ const Form = ({
         </div>
       </form>
     </>
-  ) : (
-    <FormSuccess />
   )
 }
 export default Form

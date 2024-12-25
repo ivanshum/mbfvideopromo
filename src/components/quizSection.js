@@ -4,20 +4,22 @@ import "react-phone-number-input/style.css"
 import ru from "react-phone-number-input/locale/ru"
 import PhoneInput, { isPossiblePhoneNumber } from "react-phone-number-input"
 import { useAppContext } from "../context/AppContext"
-import FormSuccess from "./formSuccess"
 import SendFunc from "../utility/formSubmitFunc"
+import { navigate } from "gatsby"
 const QuizSection = () => {
   const {
     register,
     watch,
     handleSubmit,
     control,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
   } = useForm({ mode: "all" })
   const onSubmit = data => {
     const { ["quizformphone"]: _, ...rest } = data
     const withoutphone = Object.assign({}, rest)
-    SendFunc(data["quizformphone"], "quizform", withoutphone)
+    SendFunc(data["quizformphone"], "quizform", withoutphone, () =>
+      navigate("/thx-conversion/")
+    )
   }
   const [frame, setFrame] = React.useState(0)
   const formValues = watch()
@@ -289,73 +291,69 @@ const QuizSection = () => {
             <BackButton />
             <ButtonStep step={7} action={() => setFrame(8)} />
           </div>
-        </div>{" "}
+        </div>
         <div
           className={`${
             frame === 8 ? `block` : `hidden`
           } border border-black rounded-3xl my-8 relative flex flex-col p-4 gap-2 lg:p-8 lg:gap-4 min-h-96 justify-between items-center`}
         >
-          {!isSubmitSuccessful ? (
-            <>
-              <h4 className="text-xl md:text-2xl lg:text-3xl text-center">
-                Оставте ваши контакты чтобы получить предложение
-              </h4>
-              <label className="block pb-2" htmlFor={"quizformphone"}>
-                Ваш номер телефона
-              </label>
-              <div className="flex flex-col gap-2 lg:gap-4 lg:flex-row">
-                <div>
-                  <Controller
-                    name={"quizformphone"}
-                    control={control}
-                    rules={{
-                      validate: value => {
-                        try {
-                          return isPossiblePhoneNumber(value)
-                        } catch (error) {
-                          console.error(error)
-                          return false
-                        }
-                      },
-                    }}
-                    render={({ field: { onChange, onBlur, value = "+7" } }) => (
-                      <PhoneInput
-                        value={value}
-                        labels={ru}
-                        className={`rounded-lg px-5 py-2.5  box-border border-2 bg-inherit ${
-                          errors["quizformphone"]
-                            ? "border-red-500"
-                            : "border-gray-800"
-                        } lg:h-full`}
-                        onBlur={onBlur}
-                        onChange={onChange}
-                        defaultCountry={"RU"}
-                        international
-                        addInternationalOption={false}
-                        withCountryCallingCode
-                        id={"quizformphone"}
-                      />
-                    )}
-                  />
-                </div>
+          <>
+            <h4 className="text-xl md:text-2xl lg:text-3xl text-center">
+              Оставте ваши контакты чтобы получить предложение
+            </h4>
+            <label className="block pb-2" htmlFor={"quizformphone"}>
+              Ваш номер телефона
+            </label>
+            <div className="flex flex-col gap-2 lg:gap-4 lg:flex-row">
+              <div>
+                <Controller
+                  name={"quizformphone"}
+                  control={control}
+                  rules={{
+                    validate: value => {
+                      try {
+                        return isPossiblePhoneNumber(value)
+                      } catch (error) {
+                        console.error(error)
+                        return false
+                      }
+                    },
+                  }}
+                  render={({ field: { onChange, onBlur, value = "+7" } }) => (
+                    <PhoneInput
+                      value={value}
+                      labels={ru}
+                      className={`rounded-lg px-5 py-2.5  box-border border-2 bg-inherit ${
+                        errors["quizformphone"]
+                          ? "border-red-500"
+                          : "border-gray-800"
+                      } lg:h-full`}
+                      onBlur={onBlur}
+                      onChange={onChange}
+                      defaultCountry={"RU"}
+                      international
+                      addInternationalOption={false}
+                      withCountryCallingCode
+                      id={"quizformphone"}
+                    />
+                  )}
+                />
               </div>
-              <div className="text-sm pt-2">
-                Нажимая кнопку, вы соглашаетесь с{" "}
-                <a
-                  onClick={() => setIsModalOpen(true)}
-                  className="box-border border-b-2 border-dotted border-blue-800 cursor-pointer"
-                >
-                  политикой конфиденциальности
-                </a>
-              </div>
-              <div className="flex flex-row justify-between w-full">
-                <BackButton />
-                <ButtonStep step={8} />
-              </div>
-            </>
-          ) : (
-            <FormSuccess />
-          )}
+            </div>
+            <div className="text-sm pt-2">
+              Нажимая кнопку, вы соглашаетесь с&nbsp;
+              <a
+                onClick={() => setIsModalOpen(true)}
+                className="box-border border-b-2 border-dotted border-blue-800 cursor-pointer"
+              >
+                политикой конфиденциальности
+              </a>
+            </div>
+            <div className="flex flex-row justify-between w-full">
+              <BackButton />
+              <ButtonStep step={8} />
+            </div>
+          </>
         </div>
       </form>
     </div>
