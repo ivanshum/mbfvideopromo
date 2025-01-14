@@ -4,7 +4,8 @@ import { IconContext } from "react-icons"
 import { useAppContext } from "../context/AppContext"
 
 const Footer = () => {
-  const { setIsModalFormOpen } = useAppContext()(
+  const { setIsModalFormOpen } = useAppContext()
+  return (
     <>
       <div className="p-3 w-full flex items-center justify-center text-center">
         <div>
