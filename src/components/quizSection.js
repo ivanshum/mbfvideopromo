@@ -74,11 +74,11 @@ const QuizSection = () => {
       </button>
     )
   }
-  const Answer = ({ step, index, value, text }) => {
+  const Answer = ({ step, index, value, text, action }) => {
     return (
       <div className="flex flex-row gap-4">
         <input
-          {...register(`answer${step}`, { required: true })}
+          {...register(`answer${step}`, { required: true, onChange: action })}
           type="radio"
           id={`answer${step}_${index}`}
           value={value || text || `${step}_${index}`}
@@ -112,8 +112,18 @@ const QuizSection = () => {
               value="Ваше мероприятие будет проходить на открытой или закрытой площадке?"
               name={`question0`}
             />
-            <Answer step={0} index={0} text={"На открытой площадке"} />
-            <Answer step={0} index={1} text={"В помещении"} />
+            <Answer
+              step={0}
+              index={0}
+              text={"На открытой площадке"}
+              action={() => setFrame(1)}
+            />
+            <Answer
+              step={0}
+              index={1}
+              text={"В помещении"}
+              action={() => setFrame(1)}
+            />
           </div>
           <div className="self-end">
             <ButtonStep step={0} action={() => setFrame(1)} />
@@ -134,9 +144,24 @@ const QuizSection = () => {
               value="Где будет проходить мероприятие?"
               name={`question1`}
             />
-            <Answer step={1} index={0} text={"Москва"} />
-            <Answer step={1} index={1} text={"Московская область"} />
-            <Answer step={1} index={2} text={"Другое"} />
+            <Answer
+              step={1}
+              index={0}
+              text={"Москва"}
+              action={() => setFrame(2)}
+            />
+            <Answer
+              step={1}
+              index={1}
+              text={"Московская область"}
+              action={() => setFrame(2)}
+            />
+            <Answer
+              step={1}
+              index={2}
+              text={"Другое"}
+              action={() => setFrame(2)}
+            />
           </div>
           <div className="flex flex-row justify-between w-full">
             <BackButton />
@@ -158,10 +183,30 @@ const QuizSection = () => {
               value="Какое планируется количество гостей?"
               name={`question2`}
             />
-            <Answer step={2} index={0} text={"До 100"} />
-            <Answer step={2} index={1} text={"100-500"} />
-            <Answer step={2} index={2} text={"500-1000"} />
-            <Answer step={2} index={3} text={"1000 и более"} />
+            <Answer
+              step={2}
+              index={0}
+              text={"До 100"}
+              action={() => setFrame(3)}
+            />
+            <Answer
+              step={2}
+              index={1}
+              text={"100-500"}
+              action={() => setFrame(3)}
+            />
+            <Answer
+              step={2}
+              index={2}
+              text={"500-1000"}
+              action={() => setFrame(3)}
+            />
+            <Answer
+              step={2}
+              index={3}
+              text={"1000 и более"}
+              action={() => setFrame(3)}
+            />
           </div>
           <div className="flex flex-row justify-between w-full">
             <BackButton />
@@ -182,16 +227,19 @@ const QuizSection = () => {
               type="hidden"
               value="Мероприятие частное или компании?"
               name={`question3`}
+              action={() => setFrame(4)}
             />
             <Answer
               step={3}
               index={0}
               text={"Частное (день рождения и т.д.)"}
+              action={() => setFrame(4)}
             />
             <Answer
               step={3}
               index={1}
               text={"Компании (корпоратив, конференция и т.д.)"}
+              action={() => setFrame(4)}
             />
           </div>
           <div className="flex flex-row justify-between w-full">
@@ -214,8 +262,13 @@ const QuizSection = () => {
               value="Предполагается ли прямая трансляция?"
               name={`question4`}
             />
-            <Answer step={4} index={0} text={"Да"} />
-            <Answer step={4} index={1} text={"Нет"} />
+            <Answer step={4} index={0} text={"Да"} action={() => setFrame(5)} />
+            <Answer
+              step={4}
+              index={1}
+              text={"Нет"}
+              action={() => setFrame(5)}
+            />
           </div>
           <div className="flex flex-row justify-between w-full">
             <BackButton />
@@ -237,8 +290,13 @@ const QuizSection = () => {
               value="Предполагается ли видеоинтервью у участников/гостей мероприятия?"
               name={`question5`}
             />
-            <Answer step={5} index={0} text={"Да"} />
-            <Answer step={5} index={1} text={"Нет"} />
+            <Answer step={5} index={0} text={"Да"} action={() => setFrame(6)} />
+            <Answer
+              step={5}
+              index={1}
+              text={"Нет"}
+              action={() => setFrame(6)}
+            />
           </div>
           <div className="flex flex-row justify-between w-full">
             <BackButton />
@@ -260,8 +318,13 @@ const QuizSection = () => {
               value="Нужен ли монтаж ролика в день мероприятия (SDE)?"
               name={`question6`}
             />
-            <Answer step={6} index={0} text={"Да"} />
-            <Answer step={6} index={1} text={"Нет"} />
+            <Answer step={6} index={0} text={"Да"} action={() => setFrame(7)} />
+            <Answer
+              step={6}
+              index={1}
+              text={"Нет"}
+              action={() => setFrame(7)}
+            />
           </div>
           <div className="flex flex-row justify-between w-full">
             <BackButton />
@@ -283,9 +346,24 @@ const QuizSection = () => {
               value="Сколько будет длиться мероприятие?"
               name={`question7`}
             />
-            <Answer step={7} index={0} text={"3-4 часа"} />
-            <Answer step={7} index={1} text={"5-6 часов"} />
-            <Answer step={7} index={2} text={"7 и более часов"} />
+            <Answer
+              step={7}
+              index={0}
+              text={"3-4 часа"}
+              action={() => setFrame(8)}
+            />
+            <Answer
+              step={7}
+              index={1}
+              text={"5-6 часов"}
+              action={() => setFrame(8)}
+            />
+            <Answer
+              step={7}
+              index={2}
+              text={"7 и более часов"}
+              action={() => setFrame(8)}
+            />
           </div>
           <div className="flex flex-row justify-between w-full">
             <BackButton />
