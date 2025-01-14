@@ -5,7 +5,7 @@ import Seo from "../components/seo"
 import ReactVideo from "../components/reactvideo"
 import useWindowSize from "../hooks/useWindowSize"
 
-const ThxConversion = ({ data }) => {
+const ThxConversionPage = ({ data }) => {
   const { ar } = useWindowSize()
   return (
     <Layout data={data} hideFooter>
@@ -60,7 +60,7 @@ export const Head = ({ data }) => (
   <Seo title={`${data.site.siteMetadata?.title} | Видео высокого качества`} />
 )
 
-export default ThxConversion
+export default ThxConversionPage
 
 export const query = graphql`
   query SiteTitleQuery {
