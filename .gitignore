@@ -68,3 +68,5 @@ yarn-error.log
 # Yarn Integrity file
 .yarn-integrity
 public.tar.gz
+#Composer vendor
+vendor/
