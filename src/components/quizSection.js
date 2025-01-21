@@ -232,12 +232,14 @@ const QuizSection = () => {
             <Answer
               step={3}
               index={0}
+              value={"Частное"}
               text={"Частное (день рождения и т.д.)"}
               action={() => setFrame(4)}
             />
             <Answer
               step={3}
               index={1}
+              value={"Корпоратив"}
               text={"Компании (корпоратив, конференция и т.д.)"}
               action={() => setFrame(4)}
             />

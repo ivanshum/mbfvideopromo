@@ -10,7 +10,7 @@ const SendFunc = async (
   formData.append(`id`, id)
   formData.append(`isquiz`, !!(Object.keys(data).length !== 0))
   formData.append(`addData`, Object.entries(data))
-  return fetch("/form.php", {
+  return fetch("/amo/index.php", {
     method: "POST",
     body: formData,
   })

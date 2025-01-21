@@ -50,7 +50,7 @@ EOF;
 function ParseData($data): object
 {
     $objectData = new stdClass();
-    $objectData->phone = $data["phone"];
+    $objectData->phone = "+" . $data["phone"];
     $objectData->id = $data["id"];
     if (isset($data['addData'])) {
         $dataarrayorig = explode(',', $data['addData']);
@@ -69,10 +69,12 @@ function ParseData($data): object
         foreach ($dataarray as $key => $value) {
             if (strpos($key, "question") !== false) {
                 $index = "answer" . substr($key, 8, 1);
-                $textarray[$value] = $dataarray[$index];
+                $textarray[] = $dataarray[$index];
             }
         }
-        $objectData->textarray = $textarray;
+        foreach ($textarray as $key => $value) {
+            $objectData->quiztext .= $key . ":" . $value . "\r\n";
+        }
     } else {
         $objectData->isquiz = false;
         $objectData->title = "Обращение на events.mustbefamily.com";
@@ -87,15 +89,20 @@ $apiClient->setAccessToken($longLivedAccessToken);
 $apiClient->setAccountBaseDomain('ilyakastorsky.amocrm.ru');
 
 //Обработаем данные
-
+$parsedData = ParseData([
+    "phone" => $_POST["phone"],
+    "id" => $_POST["id"],
+    "addData" => $_POST["addData"],
+    "isquiz" => $_POST["isquiz"]
+]);
 //Добавим в неразобранное форму
 $unsortedService = $apiClient->unsorted();
 $formsUnsortedCollection = new FormsUnsortedCollection();
 $formUnsorted = new FormUnsortedModel();
 $formMetadata = new FormsMetadata();
 $formMetadata
-    ->setFormId('formid')
-    ->setFormName('Обратная связь')
+    ->setFormId($parsedData->id)
+    ->setFormName($parsedData->title)
     ->setFormPage('https://event.mustbefamily.com')
     ->setFormSentAt(time());
 
@@ -109,26 +116,24 @@ $FormFieldModel->setFieldId(1010437);
 //Добавим значения
 $FormFieldModel->setValues(
     (new TextCustomFieldValueCollection())
-        ->add((new TextCustomFieldValueModel())->setValue('Должно попасть в поле форма'))
+        ->add((new TextCustomFieldValueModel())->setValue($parsedData->title))
 );
 //Добавим значение в коллекцию полей сущности
 $leadCustomFieldsValues->add($FormFieldModel);
 //Создадим модель значений поля типа область текста
 $QuizDataFieldModel = new TextareaCustomFieldValuesModel();
 //Укажем ID поля
-$QuizDataFieldModel->setFieldId(1017163);
+$QuizDataFieldModel->setFieldId(1020647);
 //Добавим значения
 $QuizDataFieldModel->setValues(
     (new TextareaCustomFieldValueCollection())
-        ->add((new TextareaCustomFieldValueModel())->setValue('Должно попасть в поле Данные квиза'))
+        ->add((new TextareaCustomFieldValueModel())->setValue($parsedData->quiztext))
 );
 //Добавим значение в коллекцию полей сущности
 $leadCustomFieldsValues->add($QuizDataFieldModel);
 //Установим в сущности эти поля
 $unsortedLead->setCustomFieldsValues($leadCustomFieldsValues);
-$unsortedLead->setName('Обращение с сайта');
-
-
+$unsortedLead->setName($parsedData->title);
 $unsortedContactsCollection = new ContactsCollection();
 $unsortedContact = new ContactModel();
 $unsortedContact->setName('Контакт');
@@ -137,7 +142,7 @@ $phoneFieldValueModel = new MultitextCustomFieldValuesModel();
 $phoneFieldValueModel->setFieldCode('PHONE');
 $phoneFieldValueModel->setValues(
     (new MultitextCustomFieldValueCollection())
-        ->add((new MultitextCustomFieldValueModel())->setValue('+79996663300'))
+        ->add((new MultitextCustomFieldValueModel())->setValue($parsedData->phone))
 );
 $unsortedContact->setCustomFieldsValues($contactCustomFields->add($phoneFieldValueModel));
 $unsortedContactsCollection->add($unsortedContact);
@@ -149,9 +154,7 @@ $formUnsorted
     ->setMetadata($formMetadata)
     ->setLead($unsortedLead)
     ->setPipelineId(9079510)
-
     ->setContacts($unsortedContactsCollection);
-
 $formsUnsortedCollection->add($formUnsorted);
 
 try {
@@ -160,4 +163,3 @@ try {
     printError($e);
     die;
 }
-echo "GG";
