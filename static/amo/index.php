@@ -1,6 +1,8 @@
 <?php
 include_once __DIR__ . '/vendor/autoload.php';
 
+if (strpos($_SERVER['HTTP_ORIGIN'], "https://events.mustbefamily.com") === false) die();
+
 use AmoCRM\Client\AmoCRMApiClient;
 use AmoCRM\Client\LongLivedAccessToken;
 use AmoCRM\Collections\CustomFieldsValuesCollection;
@@ -82,7 +84,18 @@ function ParseData($data): object
     return $objectData;
 }
 //Пройдем валидацию
+$postvars = http_build_query(["secret" => getenv('SECRETYANDEX'), "token" => $_POST["token"], "ip" => $_SERVER['REMOTE_ADDR']]) . "\n";
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, 'https://smartcaptcha.yandexcloud.net/validate?');
+curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $postvars);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$server_output = curl_exec($ch);
+curl_close($ch);
+$outputdecoded = json_decode($server_output, true);
+if ($outputdecoded["status"] !== "ok") die();
 
+//Ок, токен действительно валидный
 $apiClient = new AmoCRMApiClient();
 $longLivedAccessToken = new LongLivedAccessToken(getenv('AMOKEY'));
 $apiClient->setAccessToken($longLivedAccessToken);

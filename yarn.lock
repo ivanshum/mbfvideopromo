@@ -2469,6 +2469,11 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
+"@yandex/smart-captcha@^2.6.3":
+  version "2.6.3"
+  resolved "https://registry.yarnpkg.com/@yandex/smart-captcha/-/smart-captcha-2.6.3.tgz#afe69ec7c7d3a8743bd6feb963b31ed8c1dd04a5"
+  integrity sha512-iGAnmiDKRVG3zV5DETWGkOpuGcBMpExNCEnCDEKjid2A/MXVI46HS1ldVNJTHERNfijKzB9wd0Y08cp3wJFtCA==
+
 abortcontroller-polyfill@^1.1.9:
   version "1.7.6"
   resolved "https://registry.yarnpkg.com/abortcontroller-polyfill/-/abortcontroller-polyfill-1.7.6.tgz#7be8d35b5ed7dfa1a51b36f221720b23deb13f36"

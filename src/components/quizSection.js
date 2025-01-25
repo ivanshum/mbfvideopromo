@@ -4,23 +4,48 @@ import "react-phone-number-input/style.css"
 import ru from "react-phone-number-input/locale/ru"
 import PhoneInput, { isPossiblePhoneNumber } from "react-phone-number-input"
 import { useAppContext } from "../context/AppContext"
-import SendFunc from "../utility/formSubmitFunc"
+import SendFunc, { ValidateToken } from "../utility/formSubmitFunc"
 import { navigate } from "gatsby"
+import { InvisibleSmartCaptcha } from "@yandex/smart-captcha"
+
 const QuizSection = () => {
   const {
     register,
+    setValue,
     watch,
     handleSubmit,
     control,
     formState: { errors },
   } = useForm({ mode: "all" })
-  const onSubmit = data => {
-    const { ["quizformphone"]: _, ...rest } = data
-    const withoutphone = Object.assign({}, rest)
-    SendFunc(data["quizformphone"], "quizform", withoutphone, () =>
-      navigate("/thx-conversion/")
-    )
+  const formRef = React.useRef()
+  /* Captcha states and handlers*/
+  const [token, setToken] = React.useState("")
+  const [visible, setVisible] = React.useState(false)
+
+  const handleChallengeHidden = React.useCallback(() => {
+    setVisible(false)
+  }, [])
+  const [resetCaptcha, setResetCaptcha] = React.useState(0)
+  const handleReset = () => {
+    setResetCaptcha(prev => prev + 1)
   }
+  const onSubmit = data => {
+    const { ["quizformphone"]: phone, ["tokenval"]: tokenval, ...rest } = data
+    const withoutphone = Object.assign({}, rest)
+    setVisible(true)
+    ValidateToken(tokenval).then(response => {
+      /* &&    response.host.indexOf("events.mustbefamily.com") !== -1 */
+      if (response.status === "ok") {
+        SendFunc(tokenval, phone, "quizform", withoutphone, () =>
+          navigate("/thx-conversion/")
+        )
+      } else {
+        handleReset()
+        setVisible(true)
+      }
+    })
+  }
+
   const [frame, setFrame] = React.useState(0)
   const formValues = watch()
   const { setIsModalOpen } = useAppContext()
@@ -56,6 +81,8 @@ const QuizSection = () => {
         ? `Следующий вопрос`
         : step === 7
         ? `Оставить контакты`
+        : errors["tokenval"]
+        ? "Подтвердите что вы не робот"
         : `Получить предложение`
     const buttonProps =
       step !== 8 ? { type: "button", onClick: action } : { type: "submit" }
@@ -96,7 +123,51 @@ const QuizSection = () => {
         Пройдите опрос и получите уникальное предложение созданное специально
         для вас
       </h3>
-      <form onSubmit={handleSubmit(onSubmit)} id="quizform">
+      <form onSubmit={handleSubmit(onSubmit)} id="quizform" ref={formRef}>
+        <InvisibleSmartCaptcha
+          hideShield
+          key={`quizform${resetCaptcha}`}
+          sitekey="ysc1_groIhhSDBRkyFdUYaDNvlybAEndJBO81gZkPztbC859af50d"
+          onSuccess={tokenvalue => {
+            setValue("tokenval", tokenvalue)
+            setToken(tokenvalue)
+            const timeout = setTimeout(() => {
+              formRef.current.dispatchEvent(
+                new Event("submit", { cancelable: true, bubbles: true })
+              )
+              clearTimeout(timeout)
+            }, 500)
+          }}
+          onTokenExpired={handleReset}
+          onJavascriptError={() =>
+            alert(
+              "Произошла ошибка в работе Javascript, попробуйте обновить страницу и попробуйте ещё раз"
+            )
+          }
+          onNetworkError={() =>
+            alert(
+              "Произошда ошибка соединения с интернетом, проверьте подключение и попробуйте ещё раз, возможно необходимо обновить страницу."
+            )
+          }
+          onChallengeHidden={handleChallengeHidden}
+          visible={visible}
+        />
+        <input
+          type="hidden"
+          name="tokenval"
+          value={token}
+          {...register("tokenval", {
+            value: token,
+            validate: tokenval => {
+              if (tokenval == token && token !== "") {
+                return true
+              } else {
+                setVisible(true)
+                return false
+              }
+            },
+          })}
+        />
         <div
           className={`${
             frame === 0 ? `block` : `hidden`
